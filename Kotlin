@@ -1,0 +1,266 @@
+import kotlin.math.sqrt
+
+// Функция для вычисления факториала
+fun factorial(n: Int): Long {
+    return if (n == 0 || n == 1) 1 else n * factorial(n - 1)
+}
+
+// Функция проверки, является число четным или нет
+fun isEven(number: Int): Boolean {
+    return number % 2 == 0
+}
+
+// Функция для вывода простых чисел до указанного числа
+fun primeNumbersUpTo(n: Int): List<Int> {
+    return (2..n).filter { num ->
+        (2 until num).none { num % it == 0 }
+    }
+}
+
+// Главная программа
+fun main() {
+    while (true) {
+        println("\nВыберите номер задачи, которую хотите выполнить:")
+        println("1. Нахождение максимума из двух чисел")
+        println("2. Деление двух чисел")
+        println("3. Конвертация строки в целое число")
+        println("4. Проверка возраста (от 0 до 150)")
+        println("5. Нахождение квадратного корня числа")
+        println("6. Вычисление факториала числа")
+        println("7. Проверка массива на наличие нулей")
+        println("8. Проверить, является ли число четным")
+        println("9. Найти простые числа до указанного числа")
+        println("10. Подсчет суммы элементов массива")
+        println("11. Поиск минимума в массиве")
+        println("12. Проверка числа на палиндром")
+        println("13. Вывести первые N чисел Фибоначчи")
+        println("14. Подсчет количества гласных в строке")
+        println("15. Конвертация температуры из Цельсия в Фаренгейт")
+        println("16. Проверить, является ли строка анаграммой другой")
+        println("17. Циклический сдвиг элементов массива")
+        println("18. Найти НОД двух чисел")
+        println("19. Проверить, является ли число степенью двойки")
+        println("20. Вычислить произведение всех четных чисел из диапазона")
+        println("0. Выход")
+
+        when (readLine()?.toIntOrNull()) {
+            1 -> {
+                println("Введите два числа:")
+                val a = readLine()?.toIntOrNull() ?: 0
+                val b = readLine()?.toIntOrNull() ?: 0
+                println("Максимальное число: ${maxOf(a, b)}")
+            }
+
+            2 -> {
+                println("Введите два числа:")
+                val numerator = readLine()?.toDoubleOrNull() ?: 0.0
+                val denominator = readLine()?.toDoubleOrNull() ?: 1.0
+                if (denominator == 0.0) {
+                    println("Ошибка: деление на ноль!")
+                } else {
+                    println("Результат деления: ${numerator / denominator}")
+                }
+            }
+
+            3 -> {
+                println("Введите строку:")
+                val str = readLine() ?: ""
+                val num = str.toIntOrNull()
+                if (num != null) {
+                    println("Целое число: $num")
+                } else {
+                    println("Ошибка: невозможно преобразовать в число.")
+                }
+            }
+
+            4 -> {
+                println("Введите возраст:")
+                val age = readLine()?.toIntOrNull()
+                if (age != null && age in 0..150) {
+                    println("Возраст допустимый: $age")
+                } else {
+                    println("Ошибка: возраст должен быть в диапазоне от 0 до 150.")
+                }
+            }
+
+            5 -> {
+                println("Введите число:")
+                val number = readLine()?.toDoubleOrNull()
+                if (number != null && number >= 0) {
+                    println("Квадратный корень: ${sqrt(number)}")
+                } else {
+                    println("Ошибка: введите неотрицательное число.")
+                }
+            }
+
+            6 -> {
+                println("Введите целое число для вычисления факториала:")
+                val n = readLine()?.toIntOrNull()
+                if (n != null && n >= 0) {
+                    println("Факториал $n = ${factorial(n)}")
+                } else {
+                    println("Ошибка: введите неотрицательное целое число.")
+                }
+            }
+
+            7 -> {
+                println("Введите элементы массива через пробел:")
+                val array = readLine()?.split(" ")?.mapNotNull { it.toIntOrNull() }
+                if (array != null) {
+                    println("Массив содержит нули: ${array.contains(0)}")
+                } else {
+                    println("Ошибка: некорректный ввод.")
+                }
+            }
+
+            8 -> {
+                println("Введите число для проверки:")
+                val number = readLine()?.toIntOrNull()
+                if (number != null) {
+                    println("Число $number является четным: ${isEven(number)}")
+                } else {
+                    println("Ошибка: введите целое число.")
+                }
+            }
+
+            9 -> {
+                println("Введите верхнюю границу для нахождения простых чисел:")
+                val n = readLine()?.toIntOrNull()
+                if (n != null && n > 1) {
+                    println("Простые числа до $n: ${primeNumbersUpTo(n)}")
+                } else {
+                    println("Ошибка: введите целое число больше 1.")
+                }
+            }
+
+            10 -> {
+                println("Введите элементы массива через пробел:")
+                val array = readLine()?.split(" ")?.mapNotNull { it.toIntOrNull() }
+                if (array != null) {
+                    println("Сумма элементов массива: ${array.sum()}")
+                } else {
+                    println("Ошибка: некорректный ввод.")
+                }
+            }
+
+            11 -> {
+                println("Введите элементы массива через пробел:")
+                val array = readLine()?.split(" ")?.mapNotNull { it.toIntOrNull() }
+                if (array != null) {
+                    println("Минимальное значение в массиве: ${array.minOrNull()}")
+                } else {
+                    println("Ошибка: некорректный ввод.")
+                }
+            }
+
+            12 -> {
+                println("Введите число для проверки на палиндром:")
+                val number = readLine() ?: ""
+                if (number == number.reversed()) {
+                    println("Число $number является палиндромом.")
+                } else {
+                    println("Число $number не является палиндромом.")
+                }
+            }
+
+            13 -> {
+                println("Введите количество чисел Фибоначчи:")
+                val n = readLine()?.toIntOrNull()
+                if (n != null && n > 0) {
+                    val fibonacci = generateSequence(Pair(0, 1)) { Pair(it.second, it.first + it.second) }
+                        .map { it.first }
+                        .take(n)
+                        .toList()
+                    println("Числа Фибоначчи: $fibonacci")
+                } else {
+                    println("Ошибка: введите положительное целое число.")
+                }
+            }
+
+            14 -> {
+                println("Введите строку:")
+                val str = readLine() ?: ""
+                val vowels = "aeiouyAEIOUYаеёиоуыэюяАЕЁИОУЫЭЮЯ"
+                val count = str.count { it in vowels }
+                println("Количество гласных: $count")
+            }
+
+            15 -> {
+                println("Введите температуру в градусах Цельсия:")
+                val celsius = readLine()?.toDoubleOrNull()
+                if (celsius != null) {
+                    val fahrenheit = celsius * 9 / 5 + 32
+                    println("Температура в Фаренгейтах: $fahrenheit")
+                } else {
+                    println("Ошибка: введите число.")
+                }
+            }
+
+            16 -> {
+                println("Введите первую строку:")
+                val str1 = readLine()?.toLowerCase() ?: ""
+                println("Введите вторую строку:")
+                val str2 = readLine()?.toLowerCase() ?: ""
+                if (str1.toList().sorted() == str2.toList().sorted()) {
+                    println("Это анаграммы.")
+                } else {
+                    println("Это не анаграммы.")
+                }
+            }
+
+            17 -> {
+                println("Введите элементы массива через пробел:")
+                val array = readLine()?.split(" ")?.toTypedArray() ?: emptyArray()
+                println("Введите сдвиг (положительный):")
+                val k = readLine()?.toIntOrNull() ?: 0
+                val shiftedArray = array.takeLast(k % array.size) + array.dropLast(k % array.size)
+                println("Массив после сдвига: ${shiftedArray.joinToString(" ")}")
+            }
+
+            18 -> {
+                println("Введите два числа для нахождения НОД:")
+                val a = readLine()?.toIntOrNull() ?: 0
+                val b = readLine()?.toIntOrNull() ?: 0
+                var x = a
+                var y = b
+                while (y != 0) {
+                    val temp = y
+                    y = x % y
+                    x = temp
+                }
+                println("НОД чисел $a и $b равен $x")
+            }
+
+            19 -> {
+                println("Введите число для проверки:")
+                val number = readLine()?.toIntOrNull()
+                if (number != null && number > 0) {
+                    val isPowerOfTwo = (number and (number - 1)) == 0
+                    println("Число $number является степенью двойки: $isPowerOfTwo")
+                } else {
+                    println("Ошибка: введите положительное число.")
+                }
+            }
+
+            20 -> {
+                println("Введите диапазон (начало и конец) через пробел:")
+                val range = readLine()?.split(" ")?.mapNotNull { it.toIntOrNull() }
+                if (range != null && range.size == 2) {
+                    val product = (range[0]..range[1]).filter { it % 2 == 0 }.fold(1) { acc, i -> acc * i }
+                    println("Произведение четных чисел из диапазона: $product")
+                } else {
+                    println("Ошибка: введите 2 числа через пробел.")
+                }
+            }
+
+            0 -> {
+                println("Завершение работы...")
+                break
+            }
+
+            else -> {
+                println("Ошибка: номер задачи некорректен. Попробуйте снова.")
+            }
+        }
+    }
+}
