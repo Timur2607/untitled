@@ -1,0 +1,293 @@
+import 'dart:io';
+
+// Общий класс для всех задач
+class Tasks {
+  // Задача 1: Приветствие пользователя
+  void task1() {
+    stdout.write("Введите ваше имя: ");
+    String? name = stdin.readLineSync();
+    print("Привет, $name! Добро пожаловать!");
+  }
+
+  // Задача 2: Сумма двух чисел
+  void task2() {
+    stdout.write("Введите первое число: ");
+    int num1 = int.parse(stdin.readLineSync()!);
+    stdout.write("Введите второе число: ");
+    int num2 = int.parse(stdin.readLineSync()!);
+    print("Сумма чисел: ${num1 + num2}");
+  }
+
+  // Задача 3: Проверка четности числа
+  void task3() {
+    stdout.write("Введите число: ");
+    int number = int.parse(stdin.readLineSync()!);
+    if (number % 2 == 0) {
+      print("Число $number четное.");
+    } else {
+      print("Число $number нечетное.");
+    }
+  }
+
+  // Задача 4: Таблица умножения на число
+  void task4() {
+    stdout.write("Введите число: ");
+    int number = int.parse(stdin.readLineSync()!);
+    for (int i = 1; i <= 10; i++) {
+      print("$number * $i = ${number * i}");
+    }
+  }
+
+  // Задача 5: Нахождение максимального из трех чисел
+  void task5() {
+    stdout.write("Введите первое число: ");
+    int a = int.parse(stdin.readLineSync()!);
+    stdout.write("Введите второе число: ");
+    int b = int.parse(stdin.readLineSync()!);
+    stdout.write("Введите третье число: ");
+    int c = int.parse(stdin.readLineSync()!);
+    int max = a > b ? (a > c ? a : c) : (b > c ? b : c);
+    print("Максимальное число: $max");
+  }
+
+  // Задача 6: Рассчет факториала
+  void task6() {
+    stdout.write("Введите число: ");
+    int number = int.parse(stdin.readLineSync()!);
+    int factorial = 1;
+    for (int i = 1; i <= number; i++) {
+      factorial *= i;
+    }
+    print("Факториал числа $number = $factorial");
+  }
+
+  // Задача 7: Нахождение квадрата числа
+  void task7() {
+    stdout.write("Введите число: ");
+    int number = int.parse(stdin.readLineSync()!);
+    print("Квадрат числа $number = ${number * number}");
+  }
+
+  // Задача 8: Проверка, является ли строка палиндромом
+  void task8() {
+    stdout.write("Введите строку: ");
+    String? input = stdin.readLineSync();
+    String reversed = input!.split('').reversed.join();
+    if (input == reversed) {
+      print("Строка '$input' является палиндромом.");
+    } else {
+      print("Строка '$input' не является палиндромом.");
+    }
+  }
+
+  // Задача 9: Проверка простого числа
+  void task9() {
+    stdout.write("Введите число: ");
+    int number = int.parse(stdin.readLineSync()!);
+    bool isPrime = true;
+    if (number < 2) {
+      isPrime = false;
+    } else {
+      for (int i = 2; i <= number ~/ 2; i++) {
+        if (number % i == 0) {
+          isPrime = false;
+          break;
+        }
+      }
+    }
+    if (isPrime) {
+      print("Число $number является простым.");
+    } else {
+      print("Число $number не является простым.");
+    }
+  }
+
+  // Задача 10: Генерация последовательности Фибоначчи
+  void task10() {
+    stdout.write("Введите длину последовательности Фибоначчи: ");
+    int length = int.parse(stdin.readLineSync()!);
+    int a = 0, b = 1;
+    print("Последовательность Фибоначчи:");
+    for (int i = 0; i < length; i++) {
+      stdout.write("$a ");
+      int temp = a;
+      a = b;
+      b = temp + b;
+    }
+    print("");
+  }
+
+  // Задача 11: Сумма цифр числа
+  void task11() {
+    stdout.write("Введите число: ");
+    int number = int.parse(stdin.readLineSync()!);
+    int sum = 0;
+    while (number > 0) {
+      sum += number % 10;
+      number ~/= 10;
+    }
+    print("Сумма цифр числа: $sum");
+  }
+
+  // Задача 12: Перевод из градусов Цельсия в Фаренгейты
+  void task12() {
+    stdout.write("Введите температуру в градусах Цельсия: ");
+    double celsius = double.parse(stdin.readLineSync()!);
+    double fahrenheit = celsius * 9 / 5 + 32;
+    print("$celsius°C = $fahrenheit°F");
+  }
+
+  // Задача 13: Перевод числа в двоичную систему
+  void task13() {
+    stdout.write("Введите число: ");
+    int number = int.parse(stdin.readLineSync()!);
+    print("Число $number в двоичной системе: ${number.toRadixString(2)}");
+  }
+
+  // Задача 14: Расчет площади круга
+  void task14() {
+    stdout.write("Введите радиус круга: ");
+    double radius = double.parse(stdin.readLineSync()!);
+    double area = 3.14159 * radius * radius;
+    print("Площадь круга с радиусом $radius = $area");
+  }
+
+  // Задача 15: Проверка високосного года
+  void task15() {
+    stdout.write("Введите год: ");
+    int year = int.parse(stdin.readLineSync()!);
+    if ((year % 4 == 0 && year % 100 != 0) || (year % 400 == 0)) {
+      print("$year - високосный год");
+    } else {
+      print("$year - не високосный год");
+    }
+  }
+
+  // Задача 16: Обратная строка
+  void task16() {
+    stdout.write("Введите строку: ");
+    String? input = stdin.readLineSync();
+    String reversed = input!.split('').reversed.join();
+    print("Обратная строка: $reversed");
+  }
+
+  // Задача 17: Вычисление числа в степени
+  void task17() {
+    stdout.write("Введите основание: ");
+    int base = int.parse(stdin.readLineSync()!);
+    stdout.write("Введите степень: ");
+    int exponent = int.parse(stdin.readLineSync()!);
+    int result = base;
+    for (int i = 1; i < exponent; i++) {
+      result *= base;
+    }
+    print("$base в степени $exponent = $result");
+  }
+
+  // Задача 18: Подсчет количества символов в строке
+  void task18() {
+    stdout.write("Введите строку: ");
+    String? input = stdin.readLineSync();
+    print("Количество символов в строке: ${input!.length}");
+  }
+
+  // Задача 19: Проверка положительного числа
+  void task19() {
+    stdout.write("Введите число: ");
+    int number = int.parse(stdin.readLineSync()!);
+    if (number > 0) {
+      print("Число $number положительное");
+    } else if (number < 0) {
+      print("Число $number отрицательное");
+    } else {
+      print("Число равно нулю");
+    }
+  }
+
+  // Задача 20: Нахождение площади прямоугольника
+  void task20() {
+    stdout.write("Введите длину прямоугольника: ");
+    double length = double.parse(stdin.readLineSync()!);
+    stdout.write("Введите ширину прямоугольника: ");
+    double width = double.parse(stdin.readLineSync()!);
+    print("Площадь прямоугольника: ${length * width}");
+  }
+}
+
+void main() {
+  Tasks tasks = Tasks();
+  while (true) {
+    print("\nВыберите номер задачи (1-20) или 0 для выхода: ");
+    int choice = int.parse(stdin.readLineSync()!);
+
+    if (choice == 0) {
+      print("Выход из программы.");
+      break;
+    }
+
+    switch (choice) {
+      case 1:
+        tasks.task1();
+        break;
+      case 2:
+        tasks.task2();
+        break;
+      case 3:
+        tasks.task3();
+        break;
+      case 4:
+        tasks.task4();
+        break;
+      case 5:
+        tasks.task5();
+        break;
+      case 6:
+        tasks.task6();
+        break;
+      case 7:
+        tasks.task7();
+        break;
+      case 8:
+        tasks.task8();
+        break;
+      case 9:
+        tasks.task9();
+        break;
+      case 10:
+        tasks.task10();
+        break;
+      case 11:
+        tasks.task11();
+        break;
+      case 12:
+        tasks.task12();
+        break;
+      case 13:
+        tasks.task13();
+        break;
+      case 14:
+        tasks.task14();
+        break;
+      case 15:
+        tasks.task15();
+        break;
+      case 16:
+        tasks.task16();
+        break;
+      case 17:
+        tasks.task17();
+        break;
+      case 18:
+        tasks.task18();
+        break;
+      case 19:
+        tasks.task19();
+        break;
+      case 20:
+        tasks.task20();
+        break;
+      default:
+        print("Неверный ввод. Попробуйте снова.");
+    }
+  }
+}
