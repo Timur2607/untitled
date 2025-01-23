@@ -1,293 +1,507 @@
-import 'dart:io';
+Задача 1
 
-// Общий класс для всех задач
-class Tasks {
-  // Задача 1: Приветствие пользователя
-  void task1() {
-    stdout.write("Введите ваше имя: ");
-    String? name = stdin.readLineSync();
-    print("Привет, $name! Добро пожаловать!");
+class Person {
+  String name;  // Имя человека
+  int age;      // Возраст человека
+  String gender; // Пол человека
+
+  // Конструктор для инициализации объекта Person
+  Person({required this.name, required this.age, required this.gender});
+
+  // Метод для вывода информации о человеке
+  void displayInfo() {
+    print('Имя: $name');
+    print('Возраст: $age');
+    print('Пол: $gender');
   }
 
-  // Задача 2: Сумма двух чисел
-  void task2() {
-    stdout.write("Введите первое число: ");
-    int num1 = int.parse(stdin.readLineSync()!);
-    stdout.write("Введите второе число: ");
-    int num2 = int.parse(stdin.readLineSync()!);
-    print("Сумма чисел: ${num1 + num2}");
+  // Метод для увеличения возраста на 1 год
+  void incrementAge() {
+    age++;
+    print('Возраст увеличен. Новый возраст: $age');
   }
 
-  // Задача 3: Проверка четности числа
-  void task3() {
-    stdout.write("Введите число: ");
-    int number = int.parse(stdin.readLineSync()!);
-    if (number % 2 == 0) {
-      print("Число $number четное.");
-    } else {
-      print("Число $number нечетное.");
-    }
-  }
-
-  // Задача 4: Таблица умножения на число
-  void task4() {
-    stdout.write("Введите число: ");
-    int number = int.parse(stdin.readLineSync()!);
-    for (int i = 1; i <= 10; i++) {
-      print("$number * $i = ${number * i}");
-    }
-  }
-
-  // Задача 5: Нахождение максимального из трех чисел
-  void task5() {
-    stdout.write("Введите первое число: ");
-    int a = int.parse(stdin.readLineSync()!);
-    stdout.write("Введите второе число: ");
-    int b = int.parse(stdin.readLineSync()!);
-    stdout.write("Введите третье число: ");
-    int c = int.parse(stdin.readLineSync()!);
-    int max = a > b ? (a > c ? a : c) : (b > c ? b : c);
-    print("Максимальное число: $max");
-  }
-
-  // Задача 6: Рассчет факториала
-  void task6() {
-    stdout.write("Введите число: ");
-    int number = int.parse(stdin.readLineSync()!);
-    int factorial = 1;
-    for (int i = 1; i <= number; i++) {
-      factorial *= i;
-    }
-    print("Факториал числа $number = $factorial");
-  }
-
-  // Задача 7: Нахождение квадрата числа
-  void task7() {
-    stdout.write("Введите число: ");
-    int number = int.parse(stdin.readLineSync()!);
-    print("Квадрат числа $number = ${number * number}");
-  }
-
-  // Задача 8: Проверка, является ли строка палиндромом
-  void task8() {
-    stdout.write("Введите строку: ");
-    String? input = stdin.readLineSync();
-    String reversed = input!.split('').reversed.join();
-    if (input == reversed) {
-      print("Строка '$input' является палиндромом.");
-    } else {
-      print("Строка '$input' не является палиндромом.");
-    }
-  }
-
-  // Задача 9: Проверка простого числа
-  void task9() {
-    stdout.write("Введите число: ");
-    int number = int.parse(stdin.readLineSync()!);
-    bool isPrime = true;
-    if (number < 2) {
-      isPrime = false;
-    } else {
-      for (int i = 2; i <= number ~/ 2; i++) {
-        if (number % i == 0) {
-          isPrime = false;
-          break;
-        }
-      }
-    }
-    if (isPrime) {
-      print("Число $number является простым.");
-    } else {
-      print("Число $number не является простым.");
-    }
-  }
-
-  // Задача 10: Генерация последовательности Фибоначчи
-  void task10() {
-    stdout.write("Введите длину последовательности Фибоначчи: ");
-    int length = int.parse(stdin.readLineSync()!);
-    int a = 0, b = 1;
-    print("Последовательность Фибоначчи:");
-    for (int i = 0; i < length; i++) {
-      stdout.write("$a ");
-      int temp = a;
-      a = b;
-      b = temp + b;
-    }
-    print("");
-  }
-
-  // Задача 11: Сумма цифр числа
-  void task11() {
-    stdout.write("Введите число: ");
-    int number = int.parse(stdin.readLineSync()!);
-    int sum = 0;
-    while (number > 0) {
-      sum += number % 10;
-      number ~/= 10;
-    }
-    print("Сумма цифр числа: $sum");
-  }
-
-  // Задача 12: Перевод из градусов Цельсия в Фаренгейты
-  void task12() {
-    stdout.write("Введите температуру в градусах Цельсия: ");
-    double celsius = double.parse(stdin.readLineSync()!);
-    double fahrenheit = celsius * 9 / 5 + 32;
-    print("$celsius°C = $fahrenheit°F");
-  }
-
-  // Задача 13: Перевод числа в двоичную систему
-  void task13() {
-    stdout.write("Введите число: ");
-    int number = int.parse(stdin.readLineSync()!);
-    print("Число $number в двоичной системе: ${number.toRadixString(2)}");
-  }
-
-  // Задача 14: Расчет площади круга
-  void task14() {
-    stdout.write("Введите радиус круга: ");
-    double radius = double.parse(stdin.readLineSync()!);
-    double area = 3.14159 * radius * radius;
-    print("Площадь круга с радиусом $radius = $area");
-  }
-
-  // Задача 15: Проверка високосного года
-  void task15() {
-    stdout.write("Введите год: ");
-    int year = int.parse(stdin.readLineSync()!);
-    if ((year % 4 == 0 && year % 100 != 0) || (year % 400 == 0)) {
-      print("$year - високосный год");
-    } else {
-      print("$year - не високосный год");
-    }
-  }
-
-  // Задача 16: Обратная строка
-  void task16() {
-    stdout.write("Введите строку: ");
-    String? input = stdin.readLineSync();
-    String reversed = input!.split('').reversed.join();
-    print("Обратная строка: $reversed");
-  }
-
-  // Задача 17: Вычисление числа в степени
-  void task17() {
-    stdout.write("Введите основание: ");
-    int base = int.parse(stdin.readLineSync()!);
-    stdout.write("Введите степень: ");
-    int exponent = int.parse(stdin.readLineSync()!);
-    int result = base;
-    for (int i = 1; i < exponent; i++) {
-      result *= base;
-    }
-    print("$base в степени $exponent = $result");
-  }
-
-  // Задача 18: Подсчет количества символов в строке
-  void task18() {
-    stdout.write("Введите строку: ");
-    String? input = stdin.readLineSync();
-    print("Количество символов в строке: ${input!.length}");
-  }
-
-  // Задача 19: Проверка положительного числа
-  void task19() {
-    stdout.write("Введите число: ");
-    int number = int.parse(stdin.readLineSync()!);
-    if (number > 0) {
-      print("Число $number положительное");
-    } else if (number < 0) {
-      print("Число $number отрицательное");
-    } else {
-      print("Число равно нулю");
-    }
-  }
-
-  // Задача 20: Нахождение площади прямоугольника
-  void task20() {
-    stdout.write("Введите длину прямоугольника: ");
-    double length = double.parse(stdin.readLineSync()!);
-    stdout.write("Введите ширину прямоугольника: ");
-    double width = double.parse(stdin.readLineSync()!);
-    print("Площадь прямоугольника: ${length * width}");
+  // Метод для изменения имени
+  void changeName(String newName) {
+    name = newName;
+    print('Имя изменено на: $name');
   }
 }
 
 void main() {
-  Tasks tasks = Tasks();
-  while (true) {
-    print("\nВыберите номер задачи (1-20) или 0 для выхода: ");
-    int choice = int.parse(stdin.readLineSync()!);
+  // Создание объекта класса Person
+  Person person = Person(name: 'Алексей', age: 25, gender: 'Мужской');
 
-    if (choice == 0) {
-      print("Выход из программы.");
-      break;
+  // Вывод информации о человеке
+  person.displayInfo();
+
+  // Увеличение возраста
+  person.incrementAge();
+
+  // Изменение имени
+  person.changeName('Иван');
+
+  // Вывод обновленной информации
+  person.displayInfo();
+}
+
+Задача 2
+class Person {
+  String name;  // Имя человека
+  int age;      // Возраст
+  String gender; // Пол
+
+  // Конструктор класса Person
+  Person({required this.name, required this.age, required this.gender});
+
+  // Метод для вывода информации о человеке
+  void displayInfo() {
+    print('Имя: $name');
+    print('Возраст: $age');
+    print('Пол: $gender');
+  }
+}
+
+// Класс Worker (наследуется от Person)
+class Worker extends Person {
+  double salary; // Поле зарплаты
+
+  // Конструктор класса Worker
+  Worker({required String name, required int age, required String gender, required this.salary})
+      : super(name: name, age: age, gender: gender);
+
+  // Переопределение метода displayInfo
+  @override
+  void displayInfo() {
+    super.displayInfo(); // Вызов метода displayInfo класса-родителя
+    print('Зарплата: $salary');
+  }
+}
+
+// Класс Manager (наследуется от Worker)
+class Manager extends Worker {
+  List<Worker> subordinates; // Список подчиненных сотрудников
+
+  // Конструктор класса Manager
+  Manager({
+    required String name,
+    required int age,
+    required String gender,
+    required double salary,
+    required this.subordinates,
+  }) : super(name: name, age: age, gender: gender, salary: salary);
+
+  // Переопределение метода displayInfo
+  @override
+  void displayInfo() {
+    super.displayInfo(); // Вызов метода displayInfo класса Worker
+    print('Подчиненные:');
+    if (subordinates.isEmpty) {
+      print('Нет подчиненных.');
+    } else {
+      for (var worker in subordinates) {
+        print('- ${worker.name}');
+      }
     }
+  }
 
-    switch (choice) {
-      case 1:
-        tasks.task1();
-        break;
-      case 2:
-        tasks.task2();
-        break;
-      case 3:
-        tasks.task3();
-        break;
-      case 4:
-        tasks.task4();
-        break;
-      case 5:
-        tasks.task5();
-        break;
-      case 6:
-        tasks.task6();
-        break;
-      case 7:
-        tasks.task7();
-        break;
-      case 8:
-        tasks.task8();
-        break;
-      case 9:
-        tasks.task9();
-        break;
-      case 10:
-        tasks.task10();
-        break;
-      case 11:
-        tasks.task11();
-        break;
-      case 12:
-        tasks.task12();
-        break;
-      case 13:
-        tasks.task13();
-        break;
-      case 14:
-        tasks.task14();
-        break;
-      case 15:
-        tasks.task15();
-        break;
-      case 16:
-        tasks.task16();
-        break;
-      case 17:
-        tasks.task17();
-        break;
-      case 18:
-        tasks.task18();
-        break;
-      case 19:
-        tasks.task19();
-        break;
-      case 20:
-        tasks.task20();
-        break;
-      default:
-        print("Неверный ввод. Попробуйте снова.");
+  // Метод для добавления подчиненного
+  void addSubordinate(Worker worker) {
+    subordinates.add(worker);
+    print('Подчиненный ${worker.name} добавлен.');
+  }
+
+  // Метод для удаления подчиненного
+  void removeSubordinate(Worker worker) {
+    subordinates.remove(worker);
+    print('Подчиненный ${worker.name} удален.');
+  }
+}
+
+// Пример работы
+void main() {
+  // Создание работника
+  Worker worker1 = Worker(name: 'Иван', age: 30, gender: 'Мужской', salary: 50000);
+  Worker worker2 = Worker(name: 'Ольга', age: 27, gender: 'Женский', salary: 48000);
+
+  // Создание менеджера
+  Manager manager = Manager(
+    name: 'Александр',
+    age: 40,
+    gender: 'Мужской',
+    salary: 100000,
+    subordinates: [worker1], // Один подчиненный изначально
+  );
+
+  // Вывод информации о менеджере
+  manager.displayInfo();
+
+  // Добавление нового подчиненного
+  manager.addSubordinate(worker2);
+
+  // Повторный вывод информации о менеджере
+  manager.displayInfo();
+
+  // Удаление подчиненного
+  manager.removeSubordinate(worker1);
+
+  // Очередной вывод информации
+  manager.displayInfo();
+}
+
+
+Задача 3
+
+// Интерфейс Animal
+abstract class Animal {
+  void makeSound(); // Абстрактный метод для воспроизведения звука животного
+}
+
+// Класс Dog, реализующий интерфейс Animal
+class Dog implements Animal {
+  @override
+  void makeSound() {
+    print('Собака: Гав-гав!');
+  }
+}
+
+// Класс Cat, реализующий интерфейс Animal
+class Cat implements Animal {
+  @override
+  void makeSound() {
+    print('Кошка: Мяу-мяу!');
+  }
+}
+
+// Класс Cow, реализующий интерфейс Animal
+class Cow implements Animal {
+  @override
+  void makeSound() {
+    print('Корова: Му-му!');
+  }
+}
+
+void main() {
+  // Создание массива животных
+  List<Animal> animals = [
+    Dog(),
+    Cat(),
+    Cow(),
+  ];
+
+  // Демонстрация полиморфизма
+  for (Animal animal in animals) {
+    animal.makeSound(); // Вызов метода makeSound() для каждого животного
+  }
+}
+
+Задача 4 
+
+// Абстрактный класс Transport
+abstract class Transport {
+  // Абстрактный метод move()
+  void move();
+}
+
+// Класс Car, наследующий Transport
+class Car extends Transport {
+  @override
+  void move() {
+    print('Машина едет по дороге.');
+  }
+}
+
+// Класс Bike, наследующий Transport
+class Bike extends Transport {
+  @override
+  void move() {
+    print('Велосипед движется по велодорожке.');
+  }
+}
+
+void main() {
+  // Полиморфизм: Список разных видов транспорта
+  List<Transport> transports = [
+    Car(),
+    Bike(),
+  ];
+
+  // Демонстрация вызова метода move() для каждого объекта
+  for (Transport transport in transports) {
+    transport.move();
+  }
+}
+
+
+Задача 5 
+// Класс Book
+class Book {
+  // Поля книги
+  String title;
+  String author;
+  int year;
+
+  // Конструктор
+  Book(this.title, this.author, this.year);
+
+  // Переопределение метода toString для удобства вывода на экран
+  @override
+  String toString() {
+    return 'Книга: "$title", Автор: $author, Год: $year';
+  }
+}
+
+// Класс Library
+class Library {
+  // Коллекция книг
+  List<Book> books = [];
+
+  // Метод для добавления книги
+  void addBook(Book book) {
+    books.add(book);
+    print('Книга "${book.title}" добавлена в библиотеку.');
+  }
+
+  // Метод для поиска книг по автору
+  List<Book> findBooksByAuthor(String author) {
+    return books.where((book) => book.author.toLowerCase() == author.toLowerCase()).toList();
+  }
+
+  // Метод для поиска книг по году публикации
+  List<Book> findBooksByYear(int year) {
+    return books.where((book) => book.year == year).toList();
+  }
+
+  // Метод для отображения всех книг в библиотеке
+  void displayBooks() {
+    if (books.isEmpty) {
+      print('Библиотека пуста.');
+    } else {
+      print('Книги в библиотеке:');
+      books.forEach((book) => print(book));
     }
   }
 }
+
+void main() {
+  // Создаем экземпляры книг
+  Book book1 = Book('Война и мир', 'Лев Толстой', 1869);
+  Book book2 = Book('Преступление и наказание', 'Федор Достоевский', 1866);
+  Book book3 = Book('Мастер и Маргарита', 'Михаил Булгаков', 1967);
+
+  // Создаем экземпляр библиотеки
+  Library library = Library();
+
+  // Добавляем книги в библиотеку
+  library.addBook(book1);
+  library.addBook(book2);
+  library.addBook(book3);
+
+  // Отображаем все книги
+  library.displayBooks();
+
+  // Ищем книги по автору
+  print('\nПоиск по автору "Федор Достоевский":');
+  List<Book> foundByAuthor = library.findBooksByAuthor('Федор Достоевский');
+  foundByAuthor.forEach((book) => print(book));
+
+  // Ищем книги по году публикации
+  print('\nПоиск по году 1967:');
+  List<Book> foundByYear = library.findBooksByYear(1967);
+  foundByYear.forEach((book) => print(book));
+}
+
+Задача 6
+class BankAccount {
+  // Приватные поля
+  String _accountNumber; // Номер счета (доступен только внутри класса)
+  double _balance; // Баланс (доступен только внутри класса)
+
+  // Конструктор
+  BankAccount(this._accountNumber, this._balance);
+
+  // Геттер для получения номера счёта (только чтение)
+  String get accountNumber => _accountNumber;
+
+  // Геттер для получения баланса (только чтение)
+  double get balance => _balance;
+
+  // Метод для пополнения счёта
+  void deposit(double amount) {
+    if (amount <= 0) {
+      print('Сумма для пополнения должна быть больше 0.');
+    } else {
+      _balance += amount;
+      print('Счёт пополнен на $amount. Текущий баланс: $_balance.');
+    }
+  }
+
+  // Метод для снятия средств
+  void withdraw(double amount) {
+    if (amount <= 0) {
+      print('Сумма для снятия должна быть больше 0.');
+    } else if (amount > _balance) {
+      print('Недостаточно средств! Доступный баланс: $_balance.');
+    } else {
+      _balance -= amount;
+      print('Снято $amount. Текущий баланс: $_balance.');
+    }
+  }
+}
+
+void main() {
+  // Создание банковского счёта
+  BankAccount account = BankAccount('123456789', 1000.0);
+
+  // Пополнение счёта
+  account.deposit(500); // Пополнено на 500
+  account.deposit(-100); // Ошибка
+
+  // Снятие средств
+  account.withdraw(200); // Снято 200
+  account.withdraw(1500); // Ошибка, недостаточно средств
+  account.withdraw(0); // Ошибка
+
+  // Просмотр текущего состояния счета
+  print('Номер счёта: ${account.accountNumber}');
+  print('Баланс: ${account.balance}');
+}
+
+Задача 7
+
+class Counter {
+  // Статическое поле для хранения числа созданных объектов
+  static int _count = 0;
+
+  // Конструктор
+  Counter() {
+    _incrementCount();
+  }
+
+  // Метод для увеличения счётчика объектов
+  static void _incrementCount() {
+    _count++;
+  }
+
+  // Геттер для получения текущего значения счётчика
+  static int get count => _count;
+}
+
+void main() {
+  // Создаём несколько объектов класса Counter
+  Counter obj1 = Counter();
+  Counter obj2 = Counter();
+  Counter obj3 = Counter();
+
+  // Выводим общее количество созданных объектов
+  print('Количество созданных объектов: ${Counter.count}');
+}
+
+
+Задача 8
+// Абстрактный класс Shape
+abstract class Shape {
+  // Абстрактный метод для расчета площади
+  double getArea();
+}
+
+// Класс Circle, наследующий от Shape
+class Circle extends Shape {
+  final double radius;
+
+  // Конструктор для передачи радиуса
+  Circle(this.radius);
+
+  // Реализация метода getArea() для круга
+  @override
+  double getArea() {
+    return 3.14159 * radius * radius; // Формула площади круга: πr²
+  }
+}
+
+// Класс Rectangle, наследующий от Shape
+class Rectangle extends Shape {
+  final double width;
+  final double height;
+
+  // Конструктор для передачи ширины и высоты
+  Rectangle(this.width, this.height);
+
+  // Реализация метода getArea() для прямоугольника
+  @override
+  double getArea() {
+    return width * height; // Формула площади прямоугольника: ширина * высота
+  }
+}
+
+void main() {
+  // Пример круга с радиусом 5
+  Shape circle = Circle(5.0);
+  print('Площадь круга: ${circle.getArea()}');
+
+  // Пример прямоугольника с шириной 4 и высотой 6
+  Shape rectangle = Rectangle(4.0, 6.0);
+  print('Площадь прямоугольника: ${rectangle.getArea()}');
+}
+
+
+Задача 9
+// Базовый класс Animal
+class Animal {
+  // Метод move(), который будет переопределен в потомках
+  void move() {
+    print("Животное движется...");
+  }
+}
+
+// Класс Fish, наследующий Animal
+class Fish extends Animal {
+  // Переопределение метода move()
+  @override
+  void move() {
+    print("Рыба плавает...");
+  }
+}
+
+// Класс Bird, наследующий Animal
+class Bird extends Animal {
+  // Переопределение метода move()
+  @override
+  void move() {
+    print("Птица летает...");
+  }
+}
+
+// Класс Dog, наследующий Animal
+class Dog extends Animal {
+  // Переопределение метода move()
+  @override
+  void move() {
+    print("Собака бегает...");
+  }
+}
+
+void main() {
+  // Создаем объекты классов
+  Animal genericAnimal = Animal();
+  Fish fish = Fish();
+  Bird bird = Bird();
+  Dog dog = Dog();
+
+  // Вызываем методы move() для каждого объекта
+  genericAnimal.move(); // Вывод: "Животное движется..."
+  fish.move();          // Вывод: "Рыба плавает..."
+  bird.move();          // Вывод: "Птица летает..."
+  dog.move();           // Вывод: "Собака бегает..."
+}
+
+
+Задача 10
+
+
+
+
+
+
+
+
